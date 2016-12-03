@@ -23,14 +23,11 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton radioButton_home;
     private RadioButton radioButton_my;
     private RadioButton radioButton_set;
-
     private List<Fragment> fragmentList;
     private fragmentHome fragment_home;
     private fragmentMy fragment_my;
     private fragmentSet fragment_set;
     private FragmentPagerAdapter fragmentPagerAdapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
