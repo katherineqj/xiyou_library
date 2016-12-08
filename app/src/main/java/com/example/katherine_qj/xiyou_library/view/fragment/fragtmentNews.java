@@ -24,11 +24,15 @@ import java.util.List;
  */
 public class fragtmentNews extends Fragment implements IfragmentNews{
     private View view;
+    private int Pager=2;
+    private boolean ishave=true;
     private RecyclerView recyclerView_news;
     private List<News> list = new ArrayList<>();
     private RecycleViewAdapter recycleViewAdapter ;
-    private fragementNewsPresenter fragementNewsPresenter; ;
+    private fragementNewsPresenter fragementNewsPresenter;
+    private RecyclerView.OnScrollListener mRecycleViewOnScrollerChanged;
     private ToastMassage toastMassage = new ToastMassage();
+    boolean isBottom = false;
 
     @Override
     public void showNetWorkError() {
@@ -41,11 +45,26 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
         toastMassage.showMassage("接口挂了吧还是什么乱七八糟的",getContext());
     }
 
+
+
+
     @Override
-    public void setRecycleView(List<News> list) {
-        this.list = list;
-        recyclerView_news.setLayoutManager(new LinearLayoutManager(recyclerView_news.getContext()));
-        recyclerView_news.setAdapter(recycleViewAdapter = new RecycleViewAdapter(getContext(),list));
+    public void showNoHaveDate() {
+        toastMassage.showMassage("没有更多数据了",getContext());
+        recycleViewAdapter.setLoadItemVisiable(View.GONE);
+        ishave = false;
+    }
+
+
+    @Override
+    public void setRecycleView(List<News> list,boolean isLoad) {
+        if (isLoad) {
+            this.list = list;
+            recyclerView_news.setLayoutManager(new LinearLayoutManager(recyclerView_news.getContext()));
+            recyclerView_news.setAdapter(recycleViewAdapter = new RecycleViewAdapter(getContext(), list));
+        }else {
+            recycleViewAdapter.notifyDataSetChanged();
+        }
     }
 
     @Nullable
@@ -60,5 +79,35 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
         recyclerView_news = (RecyclerView)view.findViewById(R.id.news_recyclerView);
         recycleViewAdapter = new RecycleViewAdapter(getContext(),list);
         fragementNewsPresenter = new fragementNewsPresenter(getContext(),this,list);
+        recyclerView_news.addOnScrollListener(mRecycleViewOnScrollerChanged = new RecycleViewOnScrollerChanged());
+    }
+
+    public class RecycleViewOnScrollerChanged extends RecyclerView.OnScrollListener{
+        private int laseSeeItem;
+
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            laseSeeItem = ((LinearLayoutManager)recyclerView_news.getLayoutManager()).findLastVisibleItemPosition();
+            if (isBottom){
+                recycleViewAdapter.setLoadItemVisiable(View.GONE);
+            }
+        }
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (newState==RecyclerView.SCROLL_STATE_IDLE&&laseSeeItem+1==recycleViewAdapter.getItemCount()&&ishave){
+                getNewDate(Pager++);
+
+            }
+        }
+    }
+
+    public void getNewDate( int pager){
+
+        fragementNewsPresenter.addListDate("news",pager);
+
     }
 }
