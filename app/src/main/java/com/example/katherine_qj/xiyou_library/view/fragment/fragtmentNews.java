@@ -3,12 +3,14 @@ package com.example.katherine_qj.xiyou_library.view.fragment;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.katherine_qj.xiyou_library.IView.IfragmentNews;
 import com.example.katherine_qj.xiyou_library.R;
@@ -27,12 +29,24 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
     private int Pager=2;
     private boolean ishave=true;
     private RecyclerView recyclerView_news;
+    private RelativeLayout loading_relativeLayout;
+    private RelativeLayout loadingfaild_relativeLayout;
     private List<News> list = new ArrayList<>();
     private RecycleViewAdapter recycleViewAdapter ;
+    private SwipeRefreshLayout news_swipeRefreshLayout;
     private fragementNewsPresenter fragementNewsPresenter;
     private RecyclerView.OnScrollListener mRecycleViewOnScrollerChanged;
     private ToastMassage toastMassage = new ToastMassage();
     boolean isBottom = false;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = (View)inflater.inflate(R.layout.fragment_news,container,false);
+        initView();
+        fragementNewsPresenter.getNewsList("news",1);
+        return view;
+    }
 
     @Override
     public void showNetWorkError() {
@@ -40,12 +54,13 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
 
     }
 
+
+
+
     @Override
     public void showSomethingError() {
         toastMassage.showMassage("接口挂了吧还是什么乱七八糟的",getContext());
     }
-
-
 
 
     @Override
@@ -55,6 +70,32 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
         ishave = false;
     }
 
+    @Override
+    public void setRefreshing(boolean refreshing) {
+        news_swipeRefreshLayout.setRefreshing(refreshing);
+
+    }
+    @Override
+    public void setLoadingFaild() {
+        loadingfaild_relativeLayout.setVisibility(View.VISIBLE);
+        recyclerView_news.setVisibility(View.INVISIBLE);
+        loading_relativeLayout.setVisibility(View.INVISIBLE);
+
+
+    }
+    @Override
+    public void setLoading() {
+        loading_relativeLayout.setVisibility(View.VISIBLE);
+        loadingfaild_relativeLayout.setVisibility(View.INVISIBLE);
+        recyclerView_news.setVisibility(View.INVISIBLE);
+
+    }
+    @Override
+    public void setRecycleView() {
+        recyclerView_news.setVisibility(View.VISIBLE);
+        loading_relativeLayout.setVisibility(View.INVISIBLE);
+        loadingfaild_relativeLayout.setVisibility(View.INVISIBLE);
+    }
 
     @Override
     public void setRecycleView(List<News> list,boolean isLoad) {
@@ -66,20 +107,25 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
             recycleViewAdapter.notifyDataSetChanged();
         }
     }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = (View)inflater.inflate(R.layout.fragment_news,container,false);
-        initView();
-        fragementNewsPresenter.getNewsList("news",1);
-        return view;
-    }
     public void initView(){
+        news_swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.news_swiplayout);
+        loading_relativeLayout = (RelativeLayout)view.findViewById(R.id.loading_now);
+        loadingfaild_relativeLayout=(RelativeLayout)view.findViewById(R.id.loading_faild);
+        news_swipeRefreshLayout.setColorSchemeResources(R.color.library_red);
+        news_swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                list.clear();
+                fragementNewsPresenter.getNewsList("news",1);
+
+            }
+        });
         recyclerView_news = (RecyclerView)view.findViewById(R.id.news_recyclerView);
         recycleViewAdapter = new RecycleViewAdapter(getContext(),list);
         fragementNewsPresenter = new fragementNewsPresenter(getContext(),this,list);
         recyclerView_news.addOnScrollListener(mRecycleViewOnScrollerChanged = new RecycleViewOnScrollerChanged());
+
     }
 
     public class RecycleViewOnScrollerChanged extends RecyclerView.OnScrollListener{
