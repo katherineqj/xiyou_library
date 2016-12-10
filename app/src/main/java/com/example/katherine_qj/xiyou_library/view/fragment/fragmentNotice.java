@@ -1,6 +1,7 @@
 package com.example.katherine_qj.xiyou_library.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 
 import com.example.katherine_qj.xiyou_library.IView.IfragmentNotice;
@@ -19,6 +21,7 @@ import com.example.katherine_qj.xiyou_library.bean.Notice;
 import com.example.katherine_qj.xiyou_library.model.RecycleViewAdapter;
 import com.example.katherine_qj.xiyou_library.model.ToastMassage;
 import com.example.katherine_qj.xiyou_library.presenter.fragmentNoticePresenter;
+import com.example.katherine_qj.xiyou_library.view.activity.getDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,7 @@ public class fragmentNotice extends Fragment implements IfragmentNotice {
     private RecycleViewAdapter recycleViewAdapter ;
     private RecyclerView.OnScrollListener mRecycleViewOnScrollerChanged;
     boolean isBottom = false;
+    private Intent intent;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +55,7 @@ public class fragmentNotice extends Fragment implements IfragmentNotice {
     }
     public void InitView(){
         toastMassage = new ToastMassage();
+         intent = new Intent(getContext(),getDetailActivity.class);
         notice_recycleview = (RecyclerView)view.findViewById(R.id.notice_recyclerView);
         loading_relativeLayout = (RelativeLayout)view.findViewById(R.id.loading_now);
         loadingfaild_relativeLayout=(RelativeLayout)view.findViewById(R.id.loading_faild);
@@ -65,6 +70,7 @@ public class fragmentNotice extends Fragment implements IfragmentNotice {
             }
         });
         fragmentNoticePresenter = new fragmentNoticePresenter(getContext(),this,list);
+
     }
 
     @Override
@@ -86,11 +92,21 @@ public class fragmentNotice extends Fragment implements IfragmentNotice {
     }
 
     @Override
-    public void setRecycleView(List<Notice> list, boolean isLoad) {
+    public void setRecycleView(List<Notice> list, final boolean isLoad) {
         if (isLoad) {
             this.list = list;
             notice_recycleview.setLayoutManager(new LinearLayoutManager(notice_recycleview.getContext()));
             notice_recycleview.setAdapter(recycleViewAdapter = new RecycleViewAdapter(getContext(), list,1));
+            recycleViewAdapter.setOnItemClickListener(new RecycleViewAdapter.OnRecyclerViewItemClickListener() {
+                @Override
+                public void onItemClick(View view, String ID) {
+                    intent.putExtra("type","announce");
+                    intent.putExtra("ID",ID);
+                startActivity(intent);
+
+                }
+            });
+
         }else {
             recycleViewAdapter.notifyDataSetChanged();
         }

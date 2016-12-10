@@ -1,5 +1,6 @@
 package com.example.katherine_qj.xiyou_library.view.fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.example.katherine_qj.xiyou_library.bean.News;
 import com.example.katherine_qj.xiyou_library.model.RecycleViewAdapter;
 import com.example.katherine_qj.xiyou_library.model.ToastMassage;
 import com.example.katherine_qj.xiyou_library.presenter.fragementNewsPresenter;
+import com.example.katherine_qj.xiyou_library.view.activity.getDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
     private RecycleViewAdapter recycleViewAdapter ;
     private SwipeRefreshLayout news_swipeRefreshLayout;
     private fragementNewsPresenter fragementNewsPresenter;
+    private Intent intent;
     private RecyclerView.OnScrollListener mRecycleViewOnScrollerChanged;
     private ToastMassage toastMassage = new ToastMassage();
     boolean isBottom = false;
@@ -95,6 +98,14 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
         recyclerView_news.setVisibility(View.VISIBLE);
         loading_relativeLayout.setVisibility(View.INVISIBLE);
         loadingfaild_relativeLayout.setVisibility(View.INVISIBLE);
+        recycleViewAdapter.setOnItemClickListener(new RecycleViewAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String ID) {
+                intent.putExtra("type","news");
+                intent.putExtra("ID",ID);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -103,12 +114,21 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
             this.list = list;
             recyclerView_news.setLayoutManager(new LinearLayoutManager(recyclerView_news.getContext()));
             recyclerView_news.setAdapter(recycleViewAdapter = new RecycleViewAdapter(getContext(), list));
+            recycleViewAdapter.setOnItemClickListener(new RecycleViewAdapter.OnRecyclerViewItemClickListener() {
+                @Override
+                public void onItemClick(View view, String ID) {
+                    intent.putExtra("type","news");
+                    intent.putExtra("ID",ID);
+                    startActivity(intent);
+                }
+            });
         }else {
             recycleViewAdapter.notifyDataSetChanged();
         }
     }
     public void initView(){
         news_swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.news_swiplayout);
+        intent = new Intent(getContext(),getDetailActivity.class);
         loading_relativeLayout = (RelativeLayout)view.findViewById(R.id.loading_now);
         loadingfaild_relativeLayout=(RelativeLayout)view.findViewById(R.id.loading_faild);
         news_swipeRefreshLayout.setColorSchemeResources(R.color.library_red);

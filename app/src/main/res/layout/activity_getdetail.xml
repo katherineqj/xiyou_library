@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@color/library_red"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageButton
+            android:id="@+id/detail_back"
+            android:layout_centerVertical="true"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@mipmap/back"
+           android:layout_marginLeft="25dp" />
+        <TextView
+            android:layout_centerInParent="true"
+            android:id="@+id/my_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:textColor="#ffffff"
+            android:text="详情"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/layout_detail_success"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textStyle="italic|bold"
+                android:textColor="@color/text_title"
+                android:layout_margin="20dp"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:id="@+id/detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="25dp">
+                <TextView
+                    android:textColor="@color/text_title"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:id="@+id/detail_date"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:textColor="@color/text_title"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:id="@+id/detail_publisher"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <WebView
+                android:textSize="15sp"
+                android:textColor="@color/text_title"
+                android:layout_margin="15dp"
+                android:id="@+id/detail_passage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/layout_detail_ing"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_detail_faild"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>
