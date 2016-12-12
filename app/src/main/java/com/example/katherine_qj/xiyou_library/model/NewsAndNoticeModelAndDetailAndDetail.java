@@ -12,7 +12,6 @@ import com.example.katherine_qj.xiyou_library.httpUtils.GetHttpResponseString;
 
 public class NewsAndNoticeModelAndDetailAndDetail implements INewsAndNoticeModelAndDetail {
     GetHttpResponseString getHttpResponseString = new GetHttpResponseString();
-    private String newsJsonString = null;
     @Override
     public void  getNewsJsonString(final String type, final int page ,final Handler handler) {
         new Thread(new Runnable() {

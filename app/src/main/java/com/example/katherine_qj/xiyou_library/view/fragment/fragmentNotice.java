@@ -102,7 +102,7 @@ public class fragmentNotice extends Fragment implements IfragmentNotice {
                 public void onItemClick(View view, String ID) {
                     intent.putExtra("type","announce");
                     intent.putExtra("ID",ID);
-                startActivity(intent);
+                    startActivity(intent);
 
                 }
             });

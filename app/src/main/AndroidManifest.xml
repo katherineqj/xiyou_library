@@ -19,6 +19,8 @@
         <activity android:name=".view.activity.myLoginActivity"></activity>
         <activity android:name=".view.activity.aboutOursActivity"></activity>
         <activity android:name=".view.activity.getDetailActivity"></activity>
+        <activity android:name=".view.activity.searchActivity"></activity>
+        <activity android:name=".view.activity.BookDetailActivity"></activity>
     </application>
 
 </manifest>
