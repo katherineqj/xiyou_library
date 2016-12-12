@@ -1,7 +1,12 @@
 package com.example.katherine_qj.xiyou_library.view.activity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,11 +23,13 @@ import com.example.katherine_qj.xiyou_library.IView.IsearchActivity;
 import com.example.katherine_qj.xiyou_library.R;
 import com.example.katherine_qj.xiyou_library.bean.searchbook;
 import com.example.katherine_qj.xiyou_library.httpUtils.GetHttpResponseString;
+import com.example.katherine_qj.xiyou_library.model.DBService;
 import com.example.katherine_qj.xiyou_library.model.ToastMassage;
 import com.example.katherine_qj.xiyou_library.model.searchRecycleViewAdapter;
 import com.example.katherine_qj.xiyou_library.presenter.searchActivityPresenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,9 +45,15 @@ public class searchActivity extends Activity implements IsearchActivity {
     private RelativeLayout searchFaild;
     private RelativeLayout searchLoding;
     private List<searchbook> listSearch;
+    private List<searchbook> historySearch;
     private searchRecycleViewAdapter searchRecycleViewAdapter;
     public searchActivityPresenter searchActivitypresenter;
     private ToastMassage toastMassage = new ToastMassage();
+
+
+    private DBService dbService;
+    private SQLiteDatabase database;
+    private Cursor cursor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,10 +63,12 @@ public class searchActivity extends Activity implements IsearchActivity {
     }
 
     public void initView() {
+        Great_DBS();
         intent = new Intent();
         intent.setClass(this,BookDetailActivity.class);
         searchActivitypresenter = new searchActivityPresenter(this, getApplicationContext());
         listSearch = new ArrayList<>();
+        historySearch = new ArrayList<>();
         searchBack = (ImageButton) findViewById(R.id.search_back);
         searchBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +82,9 @@ public class searchActivity extends Activity implements IsearchActivity {
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(searchRecyclerView.getContext()));
         searchFaild = (RelativeLayout) findViewById(R.id.layout_search_faild);
         searchNothing = (RelativeLayout) findViewById(R.id.layout_search_nothing);
+        listSearch = gethistoryList();
+        Collections.reverse(listSearch);
+        setRecycleView(listSearch);
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -78,6 +96,9 @@ public class searchActivity extends Activity implements IsearchActivity {
                     searchActivitypresenter.getSearchList(s.toString());
                     searchLoding();
                 } else {
+                    listSearch = gethistoryList();
+                    Collections.reverse(listSearch);
+                    setRecycleView(listSearch);
 
                 }
             }
@@ -129,8 +150,50 @@ public class searchActivity extends Activity implements IsearchActivity {
             @Override
             public void onItemClick(View view, searchbook searchbook) {
                 intent.putExtra("ID",searchbook.getID());
+                saveList(searchbook.getID(),searchbook.getTitle(),searchbook.getAuthor());
                 startActivity(intent);
             }
         });
+    }
+    public void Great_DBS(){
+        dbService = new DBService(getApplicationContext());
+        database =  dbService.getWritableDatabase();
+    }
+    public  void saveList(String id,String title,String author){
+        ContentValues values = new ContentValues();
+        values.put("ID",id);
+        Log.d("dbs",id);
+        values.put("Title",title);
+        Log.d("dbs",title);
+        values.put("Author",author);
+        Log.d("dbs",author);
+        database = dbService.getWritableDatabase();
+        database.insert("SearchBook",null,values);
+        database.close();
+        dbService.close();
+        Log.d("dbs","插入成功");
+    }
+    public List<searchbook> gethistoryList(){
+        List<searchbook> list = new ArrayList<>();
+        database  =dbService.getWritableDatabase();
+        cursor = database.query("SearchBook",null,null,null,null,null,null);
+        if (cursor.moveToFirst()){
+            do{
+                String id = cursor.getString(cursor.getColumnIndex("ID"));
+                String title = cursor.getString(cursor.getColumnIndex("Title"));
+                String anthor = cursor.getString(cursor.getColumnIndex("Author"));
+                searchbook s = new searchbook();
+                s.setID(id);
+                s.setTitle(title);
+                s.setAuthor(anthor);
+                list.add(s);
+                Log.d("dbs","查询成功");
+            }while (cursor.moveToNext());
+            cursor.close();
+            database.close();
+            dbService.close();
+        }
+        return list;
+
     }
 }
