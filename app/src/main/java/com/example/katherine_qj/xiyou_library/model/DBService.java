@@ -12,7 +12,7 @@ import android.util.Log;
 public  class DBService  extends SQLiteOpenHelper{
     private final static int VERSION = 1;
     private final static  String DATABASE_NAME = "xiyoulibrary.db";
-    public static final  String  CREATE_PUZZLE_PHOTO = "create table SearchBook(ID text ,Title text,Author text)";
+    public static final  String  CREATE_PUZZLE_PHOTO = "create table SearchBook(key integer primary key,ID text ,Title text,Author text)";
     public  DBService(Context context){
 
         this(context,DATABASE_NAME,null,VERSION);

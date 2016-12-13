@@ -37,6 +37,7 @@ import java.util.List;
  */
 
 public class searchActivity extends Activity implements IsearchActivity {
+    public static int key = 0;
     private Intent intent;
     private ImageButton searchBack;
     private EditText searchEditText;
@@ -49,11 +50,10 @@ public class searchActivity extends Activity implements IsearchActivity {
     private searchRecycleViewAdapter searchRecycleViewAdapter;
     public searchActivityPresenter searchActivitypresenter;
     private ToastMassage toastMassage = new ToastMassage();
-
-
     private DBService dbService;
     private SQLiteDatabase database;
     private Cursor cursor;
+    private boolean ishistory = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,6 +79,7 @@ public class searchActivity extends Activity implements IsearchActivity {
         searchEditText = (EditText) findViewById(R.id.search_edittext);
         searchLoding = (RelativeLayout)findViewById(R.id.layout_search_loding);
         searchRecyclerView = (RecyclerView) findViewById(R.id.search_recycleview);
+
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(searchRecyclerView.getContext()));
         searchFaild = (RelativeLayout) findViewById(R.id.layout_search_faild);
         searchNothing = (RelativeLayout) findViewById(R.id.layout_search_nothing);
@@ -93,9 +94,11 @@ public class searchActivity extends Activity implements IsearchActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s != null && s.toString().length() > 0) {
+                    ishistory = false;
                     searchActivitypresenter.getSearchList(s.toString());
                     searchLoding();
                 } else {
+                    ishistory = true;
                     listSearch = gethistoryList();
                     Collections.reverse(listSearch);
                     setRecycleView(listSearch);
@@ -154,6 +157,24 @@ public class searchActivity extends Activity implements IsearchActivity {
                 startActivity(intent);
             }
         });
+        searchRecycleViewAdapter.setOnLongItemClickListener(new searchRecycleViewAdapter.OnRecyclerViewLongItemClickListener() {
+            @Override
+            public void onLongItemClick(View view, searchbook searchbook,int position) {
+                if (ishistory) {
+                    Log.e("searchbook", searchbook.getAuthor());
+                    intent.putExtra("ID", searchbook.getID());
+                    toastMassage.showMassage(searchbook.getID() + "", getApplicationContext());
+                    int deleteKey = searchbook.getKey();
+                    historySearch.remove(position);
+                   searchRecycleViewAdapter.notifyItemRemoved(position);
+                   searchRecycleViewAdapter.notifyDataSetChanged();
+                   deletesearchlist(deleteKey);
+                    //从数据库删除
+
+                }
+            }
+        });
+
     }
     public void Great_DBS(){
         dbService = new DBService(getApplicationContext());
@@ -161,6 +182,7 @@ public class searchActivity extends Activity implements IsearchActivity {
     }
     public  void saveList(String id,String title,String author){
         ContentValues values = new ContentValues();
+
         values.put("ID",id);
         Log.d("dbs",id);
         values.put("Title",title);
@@ -179,21 +201,34 @@ public class searchActivity extends Activity implements IsearchActivity {
         cursor = database.query("SearchBook",null,null,null,null,null,null);
         if (cursor.moveToFirst()){
             do{
+                int key = cursor.getInt(cursor.getColumnIndex("key"));
                 String id = cursor.getString(cursor.getColumnIndex("ID"));
                 String title = cursor.getString(cursor.getColumnIndex("Title"));
                 String anthor = cursor.getString(cursor.getColumnIndex("Author"));
                 searchbook s = new searchbook();
+                s.setKey(key);
                 s.setID(id);
                 s.setTitle(title);
                 s.setAuthor(anthor);
-                list.add(s);
+                historySearch.add(s);
                 Log.d("dbs","查询成功");
             }while (cursor.moveToNext());
             cursor.close();
             database.close();
             dbService.close();
         }
-        return list;
+        return historySearch;
+    }
+    public void deletesearchlist( int key){
+       /* String delete  ="DELETE FROM SearchBook WHERE key="+key;
+        database.execSQL(delete);*/
 
+        Great_DBS();
+
+        database.delete("SearchBook","key=?",new String[]{String.valueOf(key)});
+
+    //    database.delete("delete","where key="+key,null);
+     //   database.close();
+     //   dbService.close();
     }
 }
