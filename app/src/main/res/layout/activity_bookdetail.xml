@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/detail_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/library_red">
+        <ImageButton
+            android:id="@+id/detail_button_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:background="@mipmap/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="图书详情"
+            android:textColor="#ffffff"
+            android:textSize="17sp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="invisible"
+        android:id="@+id/layout_detailbook_loding"
+        android:background="#fcc6c6"
+        android:layout_below="@+id/detail_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
+    <RelativeLayout
+        android:visibility="invisible"
+        android:id="@+id/layout_detailbook_faild"
+        android:background="#fcc6c6"
+        android:layout_below="@+id/detail_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
+    <ScrollView
+        android:layout_below="@id/detail_action_bar"
+        android:id="@+id/scroll_detailbook_success"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/layout_detail"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+                <ImageView
+                    android:background="@mipmap/img_book_back4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/detail_image_book"
+                    android:background="@mipmap/img_book_no"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="40dp"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/detail_text_title"
+                android:textColor="@color/text_title"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="追时间的女人 Keep time"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <Button
+                    android:layout_marginLeft="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="24sp"
+                    android:text="1"
+                    android:textColor="#ffffff"
+                    android:background="@mipmap/img_circle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/text_title"
+                    android:layout_gravity="center_vertical"
+                    android:text="基本资料"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <Button
+                    android:id="@+id/detail_button_collection"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/img_collection"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/text_title"
+                    android:layout_gravity="center_vertical"
+                    android:text="收藏"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <Button
+                    android:id="@+id/detail_button_share"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/img_share"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/text_title"
+                    android:layout_gravity="center_vertical"
+                    android:text="分享"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="索书号:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_sort"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="1712.45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="作者:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_author"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="麦格林 著 李玉瑶 译"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="页数:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_form"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="283页  ;21cm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="可借数量:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_avaliable"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="3本"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="借阅次数:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_renttimes"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="8次"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="收藏次数:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_favtimes"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="0次"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="浏览次数:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_browsetimes"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="2次"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="藏书数量:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/detail_text_total"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="3本"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="主题分类:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_subject"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="1712.45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="出版社:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_pub"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="北京  :人民文学出版社 ,2016.01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <Button
+                    android:layout_marginLeft="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="24sp"
+                    android:text="2"
+                    android:textColor="#ffffff"
+                    android:background="@mipmap/img_circle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_title"
+                    android:layout_gravity="center_vertical"
+                    android:text="流通情况"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="图书流通情况如下:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="可借数量:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_two_avaliable"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="3本"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="共有图书:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_two_total"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="3本"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_margin="20dp"
+                android:id="@+id/detail_recycleview_circulationinfo"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <Button
+                    android:layout_marginLeft="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="24sp"
+                    android:text="3"
+                    android:textColor="#ffffff"
+                    android:background="@mipmap/img_circle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_title"
+                    android:layout_gravity="center_vertical"
+                    android:text="图书摘要"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="作者简介:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_anthor_info"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="斯泰西•麦格林（Stacey McGlynn），大学主修英语文学，辅修戏剧，哥伦比亚大学艺术硕士，主修剧本创作。目前与先生和三个儿子住在纽约长岛。《追时间的女人》是她的第一部小说，故事灵感来自于她表亲的女儿──住在英国利物浦的朵特•妮可森的某次造访。本书于2008年法兰克福书展前两天被美国兰登书屋及图案的Crown/Shave Areheart出版社签下，随后，Sperling  Kupfer出版社以10万欧元抢下意大利版权，之后陆续卖出德国、荷兰、巴西等国家和地区版权，并入选全美最大书店巴诺书店杰出新人将。"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="图书简介:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/detail_text_summary"
+                    android:textColor="@color/library_gray"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="英国淑女黛西优雅地活到了77岁，一天，她无意间在家中废物盒里找到一块旧表，第一次发现上面刻了字：“献给迈克尔，祝你好运。阿图尔•鲁宾斯坦”。那是第二次世界大战期间美国士兵迈克尔转赠给她的礼物，她曾认为那代表了此生最不堪回首的伤心往事，而现在她发现自己可能错了，错了将近六十年。她决定一个人踏上追赶时间的孤独旅程，去追寻一个不知是否尚在人世的遥远恋人……\n爱与时间，都是圆的，我们终将重逢。\n逆追59年的奇迹  宛如手工蕾丝般精细而美丽的浪漫故事\n完美迷人的处女作  小说中的珍品——《柯克斯书评》\n兰登书屋旗下瞩目新人 全美最大书店巴诺书店杰出新人\n\n完美迷人的处女作，小说中的珍宝。──《柯克斯书评》\n一拿起这本书我就无法放下。──乔安妮•麦普森，《猫头鹰与月亮咖啡馆》作者\n宛如手工蕾丝般精细而美丽的浪漫故事……所有年龄层的读者都将爱上黛西的幽默感、勇气与优雅的风度。──克丽丝汀娜•利格，《梦想人生》与《现实生活与说谎家》作者\n独特而具巧思的文风，在现今的作家中特别显眼，无疑拥有独一无二的说故事才能。──朵恩•柯尔兹，《墨西哥娃娃》作者\n你绝对想象不到，这么一个看似老梗的千里寻亲、迟暮之恋的故事，竟然藏了那么多的古灵精怪和惊奇转折。——谭光磊，版权经纪人\n一本了不起的书，角色动人而真实，还有出其不意的震撼结局。──查尔斯•力格曼，亚马逊评论"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <Button
+                    android:layout_marginLeft="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="24sp"
+                    android:text="4"
+                    android:textColor="#ffffff"
+                    android:background="@mipmap/img_circle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_title"
+                    android:layout_gravity="center_vertical"
+                    android:text="相关推荐"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_margin="20dp"
+                android:id="@+id/detail_recycleview_referbooks"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
