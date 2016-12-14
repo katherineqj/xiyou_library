@@ -11,11 +11,12 @@ public class BookDetail {
     private String Sort;
     private String Anthor;
     private String Form;
-    private String Avaliable;
+    private int Avaliable;
     private int RentTimes;
     private int FavTimes;
     private int BrowseTimes;
     private int Total;
+    private String BookDetailTitle;
     private String Subject;
     private String Pub;
     private String Author_Info;
@@ -79,11 +80,11 @@ public class BookDetail {
         FavTimes = favTimes;
     }
 
-    public String getAvaliable() {
+    public int getAvaliable() {
         return Avaliable;
     }
 
-    public void setAvaliable(String avaliable) {
+    public void setAvaliable(int avaliable) {
         Avaliable = avaliable;
     }
 
@@ -133,5 +134,13 @@ public class BookDetail {
 
     public void setSummary(String summary) {
         Summary = summary;
+    }
+
+    public String getBookDetailTitle() {
+        return BookDetailTitle;
+    }
+
+    public void setBookDetailTitle(String bookDetailTitle) {
+        BookDetailTitle = bookDetailTitle;
     }
 }
