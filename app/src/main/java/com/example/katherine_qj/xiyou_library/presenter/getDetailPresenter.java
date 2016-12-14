@@ -14,7 +14,7 @@ import org.json.JSONObject;
  * Created by Katherine-qj on 2016/12/10.
  */
 
-public class getDetailPresenter {
+public class GetDetailPresenter {
     private IgetDetail igetDetail;
     private NewsAndNoticeModelAndDetailAndDetail detailModel;
     private String Title;
@@ -22,7 +22,7 @@ public class getDetailPresenter {
     private String Date;
     private String Passage;
     private JsonUtils jsonUtils = new JsonUtils();
-    public getDetailPresenter(IgetDetail igetDetail){
+    public GetDetailPresenter(IgetDetail igetDetail){
         this.igetDetail = igetDetail;
         detailModel = new NewsAndNoticeModelAndDetailAndDetail();
     }

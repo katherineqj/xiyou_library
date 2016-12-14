@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,15 +17,15 @@ import com.example.katherine_qj.xiyou_library.R;
 import com.example.katherine_qj.xiyou_library.bean.News;
 import com.example.katherine_qj.xiyou_library.model.RecycleViewAdapter;
 import com.example.katherine_qj.xiyou_library.model.ToastMassage;
-import com.example.katherine_qj.xiyou_library.presenter.fragementNewsPresenter;
-import com.example.katherine_qj.xiyou_library.view.activity.getDetailActivity;
+import com.example.katherine_qj.xiyou_library.presenter.FragementNewsPresenter;
+import com.example.katherine_qj.xiyou_library.view.activity.GetDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 /**
  * Created by Katherine-qj on 2016/12/3.
  */
-public class fragtmentNews extends Fragment implements IfragmentNews{
+public class FragtmentNews extends Fragment implements IfragmentNews{
     private View view;
     private int Pager=2;
     private boolean ishave=true;
@@ -36,7 +35,7 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
     private List<News> list = new ArrayList<>();
     private RecycleViewAdapter recycleViewAdapter ;
     private SwipeRefreshLayout news_swipeRefreshLayout;
-    private fragementNewsPresenter fragementNewsPresenter;
+    private FragementNewsPresenter FragementNewsPresenter;
     private Intent intent;
     private RecyclerView.OnScrollListener mRecycleViewOnScrollerChanged;
     private ToastMassage toastMassage = new ToastMassage();
@@ -47,7 +46,7 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = (View)inflater.inflate(R.layout.fragment_news,container,false);
         initView();
-        fragementNewsPresenter.getNewsList("news",1);
+        FragementNewsPresenter.getNewsList("news",1);
         return view;
     }
 
@@ -128,7 +127,7 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
     }
     public void initView(){
         news_swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.news_swiplayout);
-        intent = new Intent(getContext(),getDetailActivity.class);
+        intent = new Intent(getContext(),GetDetailActivity.class);
         loading_relativeLayout = (RelativeLayout)view.findViewById(R.id.loading_now);
         loadingfaild_relativeLayout=(RelativeLayout)view.findViewById(R.id.loading_faild);
         news_swipeRefreshLayout.setColorSchemeResources(R.color.library_red);
@@ -137,13 +136,13 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
             public void onRefresh() {
 
                 list.clear();
-                fragementNewsPresenter.getNewsList("news",1);
+                FragementNewsPresenter.getNewsList("news",1);
 
             }
         });
         recyclerView_news = (RecyclerView)view.findViewById(R.id.news_recyclerView);
         recycleViewAdapter = new RecycleViewAdapter(getContext(),list);
-        fragementNewsPresenter = new fragementNewsPresenter(getContext(),this,list);
+        FragementNewsPresenter = new FragementNewsPresenter(getContext(),this,list);
         recyclerView_news.addOnScrollListener(mRecycleViewOnScrollerChanged = new RecycleViewOnScrollerChanged());
 
     }
@@ -173,7 +172,7 @@ public class fragtmentNews extends Fragment implements IfragmentNews{
 
     public void getNewDate( int pager){
 
-        fragementNewsPresenter.addListDate("news",pager);
+        FragementNewsPresenter.addListDate("news",pager);
 
     }
 }

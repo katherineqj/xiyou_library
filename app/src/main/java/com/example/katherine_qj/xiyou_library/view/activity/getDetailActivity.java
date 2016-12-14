@@ -2,8 +2,6 @@ package com.example.katherine_qj.xiyou_library.view.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageButton;
@@ -14,7 +12,7 @@ import android.widget.TextView;
 import com.example.katherine_qj.xiyou_library.IView.IgetDetail;
 import com.example.katherine_qj.xiyou_library.R;
 import com.example.katherine_qj.xiyou_library.model.ToastMassage;
-import com.example.katherine_qj.xiyou_library.presenter.getDetailPresenter;
+import com.example.katherine_qj.xiyou_library.presenter.GetDetailPresenter;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -23,7 +21,7 @@ import java.net.URLEncoder;
  * Created by Katherine-qj on 2016/12/10.
  */
 
-public class getDetailActivity extends Activity implements IgetDetail{
+public class GetDetailActivity extends Activity implements IgetDetail{
     private String detailType;
     private String detailId;
     private ImageButton detailBack;
@@ -35,7 +33,7 @@ public class getDetailActivity extends Activity implements IgetDetail{
     private TextView detailDate;
     private WebView detailPassage;
     private ToastMassage toastMassage = new ToastMassage();
-    private getDetailPresenter getDetailPresenter ;
+    private GetDetailPresenter getDetailPresenter ;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +58,7 @@ public class getDetailActivity extends Activity implements IgetDetail{
         detailPublisher = (TextView)findViewById(R.id.detail_publisher);
         detailDate = (TextView)findViewById(R.id.detail_date);
         detailPassage = (WebView)findViewById(R.id.detail_passage);
-        getDetailPresenter = new getDetailPresenter(this);
+        getDetailPresenter = new GetDetailPresenter(this);
     }
 
     @Override

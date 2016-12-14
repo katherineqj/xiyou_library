@@ -7,10 +7,10 @@ import com.example.katherine_qj.xiyou_library.bean.User;
  * Created by Katherine-qj on 2016/12/3.
  */
 
-public class fragmentSetPresenter {
+public class FragmentSetPresenter {
     User user = User.getInstance();
     private IfragmentSet ifragmentSet;
-    public fragmentSetPresenter(IfragmentSet ifragmentSet){
+    public FragmentSetPresenter(IfragmentSet ifragmentSet){
         this.ifragmentSet = ifragmentSet;
     }
     public void loginOut(){

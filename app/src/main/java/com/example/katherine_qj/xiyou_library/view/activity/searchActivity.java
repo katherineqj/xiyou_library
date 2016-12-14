@@ -5,13 +5,10 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -22,11 +19,10 @@ import android.widget.RelativeLayout;
 import com.example.katherine_qj.xiyou_library.IView.IsearchActivity;
 import com.example.katherine_qj.xiyou_library.R;
 import com.example.katherine_qj.xiyou_library.bean.searchbook;
-import com.example.katherine_qj.xiyou_library.httpUtils.GetHttpResponseString;
 import com.example.katherine_qj.xiyou_library.model.DBService;
 import com.example.katherine_qj.xiyou_library.model.ToastMassage;
-import com.example.katherine_qj.xiyou_library.model.searchRecycleViewAdapter;
-import com.example.katherine_qj.xiyou_library.presenter.searchActivityPresenter;
+import com.example.katherine_qj.xiyou_library.model.SearchRecycleViewAdapter;
+import com.example.katherine_qj.xiyou_library.presenter.SearchActivityPresenter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +32,7 @@ import java.util.List;
  * Created by Katherine-qj on 2016/12/10.
  */
 
-public class searchActivity extends Activity implements IsearchActivity {
+public class SearchActivity extends Activity implements IsearchActivity {
     public static int key = 0;
     private Intent intent;
     private ImageButton searchBack;
@@ -47,8 +43,8 @@ public class searchActivity extends Activity implements IsearchActivity {
     private RelativeLayout searchLoding;
     private List<searchbook> listSearch;
     private List<searchbook> historySearch;
-    private searchRecycleViewAdapter searchRecycleViewAdapter;
-    public searchActivityPresenter searchActivitypresenter;
+    private SearchRecycleViewAdapter searchRecycleViewAdapter;
+    public SearchActivityPresenter searchActivitypresenter;
     private ToastMassage toastMassage = new ToastMassage();
     private DBService dbService;
     private SQLiteDatabase database;
@@ -66,7 +62,7 @@ public class searchActivity extends Activity implements IsearchActivity {
         Great_DBS();
         intent = new Intent();
         intent.setClass(this,BookDetailActivity.class);
-        searchActivitypresenter = new searchActivityPresenter(this, getApplicationContext());
+        searchActivitypresenter = new SearchActivityPresenter(this, getApplicationContext());
         listSearch = new ArrayList<>();
         historySearch = new ArrayList<>();
         searchBack = (ImageButton) findViewById(R.id.search_back);
@@ -148,8 +144,8 @@ public class searchActivity extends Activity implements IsearchActivity {
     public void setRecycleView(List<searchbook> list1) {
         //设置RecycleView
         Log.e("list",list1.size()+"");
-        searchRecyclerView.setAdapter(searchRecycleViewAdapter = new searchRecycleViewAdapter(this, list1));
-        searchRecycleViewAdapter.setOnItemClickListener(new searchRecycleViewAdapter.OnRecyclerViewItemClickListener() {
+        searchRecyclerView.setAdapter(searchRecycleViewAdapter = new SearchRecycleViewAdapter(this, list1));
+        searchRecycleViewAdapter.setOnItemClickListener(new SearchRecycleViewAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, searchbook searchbook) {
                 intent.putExtra("ID",searchbook.getID());
@@ -157,7 +153,7 @@ public class searchActivity extends Activity implements IsearchActivity {
                 startActivity(intent);
             }
         });
-        searchRecycleViewAdapter.setOnLongItemClickListener(new searchRecycleViewAdapter.OnRecyclerViewLongItemClickListener() {
+        searchRecycleViewAdapter.setOnLongItemClickListener(new SearchRecycleViewAdapter.OnRecyclerViewLongItemClickListener() {
             @Override
             public void onLongItemClick(View view, searchbook searchbook,int position) {
                 if (ishistory) {

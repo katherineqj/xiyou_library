@@ -11,17 +11,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 
 import com.example.katherine_qj.xiyou_library.IView.IfragmentNotice;
 import com.example.katherine_qj.xiyou_library.R;
-import com.example.katherine_qj.xiyou_library.bean.News;
 import com.example.katherine_qj.xiyou_library.bean.Notice;
 import com.example.katherine_qj.xiyou_library.model.RecycleViewAdapter;
 import com.example.katherine_qj.xiyou_library.model.ToastMassage;
-import com.example.katherine_qj.xiyou_library.presenter.fragmentNoticePresenter;
-import com.example.katherine_qj.xiyou_library.view.activity.getDetailActivity;
+import com.example.katherine_qj.xiyou_library.presenter.FragmentNoticePresenter;
+import com.example.katherine_qj.xiyou_library.view.activity.GetDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +28,7 @@ import java.util.List;
  * Created by Katherine-qj on 2016/12/3.
  */
 
-public class fragmentNotice extends Fragment implements IfragmentNotice {
+public class FragmentNotice extends Fragment implements IfragmentNotice {
     private View view;
     private int Pager=2;
     private ToastMassage toastMassage;
@@ -40,7 +38,7 @@ public class fragmentNotice extends Fragment implements IfragmentNotice {
     private boolean ishave=true;
     private List<Notice> list = new ArrayList<>();
     private SwipeRefreshLayout notice_swipeRefreshLayout;
-    private fragmentNoticePresenter fragmentNoticePresenter;
+    private FragmentNoticePresenter FragmentNoticePresenter;
     private RecycleViewAdapter recycleViewAdapter ;
     private RecyclerView.OnScrollListener mRecycleViewOnScrollerChanged;
     boolean isBottom = false;
@@ -50,12 +48,12 @@ public class fragmentNotice extends Fragment implements IfragmentNotice {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = (View)inflater.inflate(R.layout.fragment_notice,container,false);
         InitView();
-        fragmentNoticePresenter.getNoticeList("announce",1);
+        FragmentNoticePresenter.getNoticeList("announce",1);
         return view;
     }
     public void InitView(){
         toastMassage = new ToastMassage();
-         intent = new Intent(getContext(),getDetailActivity.class);
+         intent = new Intent(getContext(),GetDetailActivity.class);
         notice_recycleview = (RecyclerView)view.findViewById(R.id.notice_recyclerView);
         loading_relativeLayout = (RelativeLayout)view.findViewById(R.id.loading_now);
         loadingfaild_relativeLayout=(RelativeLayout)view.findViewById(R.id.loading_faild);
@@ -66,10 +64,10 @@ public class fragmentNotice extends Fragment implements IfragmentNotice {
             @Override
             public void onRefresh() {
                 list.clear();
-                fragmentNoticePresenter.getNoticeList("announce",1);
+                FragmentNoticePresenter.getNoticeList("announce",1);
             }
         });
-        fragmentNoticePresenter = new fragmentNoticePresenter(getContext(),this,list);
+        FragmentNoticePresenter = new FragmentNoticePresenter(getContext(),this,list);
 
     }
 
@@ -161,7 +159,7 @@ public class fragmentNotice extends Fragment implements IfragmentNotice {
     }
 
     public void getNewDate( int pager){
-        fragmentNoticePresenter.addNoticeListDate("announce",pager);
+        FragmentNoticePresenter.addNoticeListDate("announce",pager);
 
     }
 }

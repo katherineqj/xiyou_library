@@ -10,9 +10,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.katherine_qj.xiyou_library.model.TransfromAnm;
-import com.example.katherine_qj.xiyou_library.view.fragment.fragmentHome;
-import com.example.katherine_qj.xiyou_library.view.fragment.fragmentMy;
-import com.example.katherine_qj.xiyou_library.view.fragment.fragmentSet;
+import com.example.katherine_qj.xiyou_library.view.fragment.FragmentHome;
+import com.example.katherine_qj.xiyou_library.view.fragment.FragmentMy;
+import com.example.katherine_qj.xiyou_library.view.fragment.FragmentSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton radioButton_my;
     private RadioButton radioButton_set;
     private List<Fragment> fragmentList;
-    private fragmentHome fragment_home;
-    private fragmentMy fragment_my;
-    private fragmentSet fragment_set;
+    private FragmentHome fragment_home;
+    private FragmentMy fragment_my;
+    private FragmentSet fragment_set;
     private FragmentPagerAdapter fragmentPagerAdapter;
 
     @Override
@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         radioButton_set = (RadioButton)findViewById(R.id.radiobutton_set);
 
         fragmentList = new ArrayList<Fragment>();
-        fragment_home = new fragmentHome();
-        fragment_my = new fragmentMy();
-        fragment_set = new fragmentSet();
+        fragment_home = new FragmentHome();
+        fragment_my = new FragmentMy();
+        fragment_set = new FragmentSet();
         fragmentList.add(fragment_home);
         fragmentList.add(fragment_my);
         fragmentList.add(fragment_set);
