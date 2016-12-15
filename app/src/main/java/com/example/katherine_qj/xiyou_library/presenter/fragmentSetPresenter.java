@@ -14,7 +14,7 @@ public class FragmentSetPresenter {
         this.ifragmentSet = ifragmentSet;
     }
     public void loginOut(){
-        user = null;
+        user.setOnline(false);
         ifragmentSet.showMassageOut();
     }
 }

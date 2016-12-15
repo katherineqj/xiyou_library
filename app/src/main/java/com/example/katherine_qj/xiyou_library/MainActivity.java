@@ -112,18 +112,21 @@ public class MainActivity extends AppCompatActivity {
                         radioButton_home.setTextColor(getResources().getColor(R.color.library_red));
                         radioButton_my.setTextColor(getResources().getColor(R.color.library_norall));
                         radioButton_set.setTextColor(getResources().getColor(R.color.library_norall));
+                        fragment_home.onChecked(0);
                         break;
                     case 1:
                         radioButton_my.setChecked(true);
                         radioButton_my.setTextColor(getResources().getColor(R.color.library_red));
                         radioButton_home.setTextColor(getResources().getColor(R.color.library_norall));
                         radioButton_set.setTextColor(getResources().getColor(R.color.library_norall));
+                        fragment_my.onChecked(1);
                         break;
                     case 2:
                         radioButton_set.setChecked(true);
                         radioButton_set.setTextColor(getResources().getColor(R.color.library_red));
                         radioButton_my.setTextColor(getResources().getColor(R.color.library_norall));
                         radioButton_home.setTextColor(getResources().getColor(R.color.library_norall));
+                        fragment_set.onChecked(2);
                         break;
                 }
             }

@@ -21,6 +21,7 @@
         <activity android:name=".view.activity.GetDetailActivity"></activity>
         <activity android:name=".view.activity.SearchActivity"></activity>
         <activity android:name=".view.activity.BookDetailActivity"></activity>
+        <activity android:name=".view.activity.MyRentActivity"></activity>
     </application>
 
 </manifest>
