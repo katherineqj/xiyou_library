@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public class BookDetail {
+    private String image_url;
     private String Sort;
     private String Anthor;
     private String Form;
@@ -142,5 +143,13 @@ public class BookDetail {
 
     public void setBookDetailTitle(String bookDetailTitle) {
         BookDetailTitle = bookDetailTitle;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }
