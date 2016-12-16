@@ -42,6 +42,12 @@ public class MyRentActivity extends Activity implements IRentActivity {
     public void rentinitView(){
         toastMassage = new ToastMassage();
         rentBack = (ImageButton)findViewById(R.id.rent_back);
+        rentBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         rentLoding = (RelativeLayout)findViewById(R.id.rent_loding);
         rentNull  =(RelativeLayout)findViewById(R.id.rent_null);
         rentFaild = (RelativeLayout)findViewById(R.id.rent_faild);

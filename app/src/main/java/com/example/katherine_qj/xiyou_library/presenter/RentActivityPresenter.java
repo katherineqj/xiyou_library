@@ -65,7 +65,7 @@ public class RentActivityPresenter {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                     rentBook.setTitle(jsonObject1.optString("Title"));
                     rentBook.setBarcode(jsonObject1.optString("Barcode"));
-                    rentBook.setDepartment(jsonObject.optString("Department"));
+                    rentBook.setDepartment(jsonObject1 .optString("Department"));
                     rentBook.setState(jsonObject1.optString("State"));
                     rentBook.setDate(jsonObject1.optString("Date"));
                     rentBook.setCanRenew(jsonObject1.optString("CanRenew"));

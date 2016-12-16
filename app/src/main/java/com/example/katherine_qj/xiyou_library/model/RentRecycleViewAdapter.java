@@ -36,6 +36,7 @@ public class RentRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             ((ViewHolder)holder).item_rent_title.setText(rentBooks.get(position).getTitle());
             ((ViewHolder)holder).item_rent_deptment.setText(rentBooks.get(position).getDepartment());
             ((ViewHolder)holder).item_rent_date.setText(rentBooks.get(position).getDate());
+            ((ViewHolder) holder).item_rent_state.setText(rentBooks.get(position).getState());
         }
 
     }
@@ -48,11 +49,13 @@ public class RentRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         TextView item_rent_deptment;
         TextView item_rent_title;
         TextView item_rent_date;
+        TextView item_rent_state;
         public ViewHolder(View v){
             super(v);
             item_rent_title = (TextView)v.findViewById(R.id.rentbook_title_to);
             item_rent_deptment = (TextView)v.findViewById(R.id.rent_item_deptment);
             item_rent_date = (TextView)v.findViewById(R.id.rent_item_date);
+            item_rent_state = (TextView)v.findViewById(R.id.rent_item_state);
         }
     }
 }

@@ -9,7 +9,7 @@
         android:background="@color/library_red">
 
         <ImageButton
-            android:id="@+id/rent_back"
+            android:id="@+id/history_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
@@ -17,11 +17,10 @@
             android:background="@mipmap/back" />
 
         <TextView
-            android:id="@+id/my_user_name"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:gravity="center"
-            android:text="我的借阅"
+            android:text="我的足迹"
             android:textColor="#ffffff"
             android:textSize="17sp"
             android:layout_alignParentTop="true"
@@ -31,23 +30,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
-            android:id="@+id/rent_loding"
+            android:id="@+id/history_loding"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </RelativeLayout>
         <RelativeLayout
-            android:id="@+id/rent_null"
+            android:id="@+id/history_null"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </RelativeLayout>
         <RelativeLayout
-            android:id="@+id/rent_faild"
+            android:id="@+id/history_faild"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </RelativeLayout>
         <android.support.v7.widget.RecyclerView
             android:scrollbars="vertical"
-            android:id="@+id/rent_recycleview"
+            android:id="@+id/history_recycleview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
