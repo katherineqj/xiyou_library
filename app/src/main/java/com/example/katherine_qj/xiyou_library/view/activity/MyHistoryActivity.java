@@ -72,13 +72,12 @@ public class MyHistoryActivity  extends Activity implements IMyHistoryActivity{
     }
 
     @Override
-    public void SetHistoryLoding() {
+    public void SetHistoryLoding(){
         historyLoding.setVisibility(View.VISIBLE);
         historyNull.setVisibility(View.INVISIBLE);
         historyFaild.setVisibility(View.INVISIBLE);
         historyRecycleView.setVisibility(View.INVISIBLE);
     }
-
     @Override
     public void SetHistorySuccess(List<HistoryBook> historyBooks) {
         this.historyBooks = historyBooks;
@@ -88,7 +87,6 @@ public class MyHistoryActivity  extends Activity implements IMyHistoryActivity{
         historyRecycleView.setVisibility(View.VISIBLE);
         historyRecycleView.setAdapter(historyRecycleViewAdapter = new HistoryRecycleViewAdapter(this,historyBooks));
     }
-
     @Override
     public void SetHistoryFaild() {
         historyLoding.setVisibility(View.INVISIBLE);

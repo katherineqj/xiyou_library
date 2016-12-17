@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/item_shape"
+    android:layout_height="120dp">
+    <ImageView
+        android:id="@+id/item_favorite_image"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:background="@mipmap/img_book_no"
+        android:layout_height="100dp" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_weight="4"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:singleLine="true"
+            android:gravity="center_vertical"
+            android:id="@+id/favorite_title_to"
+            android:textSize="18sp"
+            android:textColor="@color/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <TextView
+                android:textColor="@color/text_title"
+                android:layout_gravity="center"
+                android:text="作者："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_gravity="center"
+                android:id="@+id/favorite_item_anthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <TextView
+                android:textColor="@color/text_title"
+                android:layout_gravity="center"
+                android:text="出版社："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_gravity="center"
+                android:id="@+id/favorite_item_pub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
