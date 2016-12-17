@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.example.katherine_qj.xiyou_library.R;
 import com.example.katherine_qj.xiyou_library.bean.FavoriteBook;
-import com.example.katherine_qj.xiyou_library.bean.HistoryBook;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -63,7 +62,6 @@ public class FavoriteRecycleViewAdapter  extends RecyclerView.Adapter<RecyclerVi
             item_favorite_pub = (TextView)v.findViewById(R.id.favorite_item_pub);
             item_favorite_anthor = (TextView)v.findViewById(R.id.favorite_item_anthor);
             item_favorite_image = (ImageView)v.findViewById(R.id.item_favorite_image);
-
         }
     }
 }

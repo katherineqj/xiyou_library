@@ -3,7 +3,7 @@ package com.example.katherine_qj.xiyou_library.model;
 import android.os.Handler;
 import android.os.Message;
 
-import com.example.katherine_qj.xiyou_library.IModel.IHistoryModel;
+import com.example.katherine_qj.xiyou_library.IModel.IRankModel;
 import com.example.katherine_qj.xiyou_library.httpUtils.GetHttpResponseString;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -15,19 +15,19 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 
 /**
- * Created by Katherine-qj on 2016/12/16.
+ * Created by Katherine-qj on 2016/12/17.
  */
 
-public class HistoryModel implements IHistoryModel {
+public class RankModel implements IRankModel {
     @Override
-    public void getHistoryJsonString(final String session, final Handler handler) {
+    public void getRankJsonString(final Handler handler) {
         RequestBody formBody = new FormEncodingBuilder()
-                .add("session", session)
+                .add("size", "50")
                 .build();
         final Request request = new Request.Builder()
-                .url("https://api.xiyoumobile.com/xiyoulibv2/user/history")
+                .url("https://api.xiyoumobile.com/xiyoulibv2/book/rank")
                 .post(formBody)
-                .tag("history")
+                .tag("rank")
                 .build();
         Call call = GetHttpResponseString.client.newCall(request);
         call.enqueue(new Callback() {
